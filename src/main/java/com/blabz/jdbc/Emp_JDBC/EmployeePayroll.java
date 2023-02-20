@@ -7,11 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class EmployeePayroll {
-	public static void preparedStatement(String name, double salary) {
+	public static boolean CreatedConnection(String s) {
+		return true;
+
+	}
+
+	public static boolean preparedStatement(String name, double salary) {
+		Connection conn;
 
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root",
-					"rootroot");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/payroll_service", "root", "rootroot");
 			String s = "update employee_payroll set salary = ? where name=?";
 			PreparedStatement ps = conn.prepareStatement(s);
 			ps.setDouble(1, salary);
@@ -22,11 +27,7 @@ public class EmployeePayroll {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-	}
-
-	public static void main(String[] args) throws SQLException {
-		preparedStatement("Bill", 450000.55);
+		return true;
 
 	}
 }
